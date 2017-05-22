@@ -1,6 +1,6 @@
 //Development CONNECTION
-Host: zme.virtual  ( is defined ass Destination with Cloud Connector)
-Port:8000 ( is defined ass Destination with Cloud Connector)
+Host: zme.virtual  ( is defined as Destination with Cloud Connector)
+Port:8000 ( is defined as Destination with Cloud Connector)
 
 //Development Authentication
 Authenicaten Type : Basic#
