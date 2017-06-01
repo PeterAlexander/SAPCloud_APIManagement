@@ -7,13 +7,12 @@ Authenicaten Type : Basic#
 UserName:CP100-##
 Password:Welcome1 ( will be provided)
 
-////Development Authentication
+//Development Authentication
 Path Prefix:/sap/opu/odata
 Service Collection URL:	/IWFND/CATALOGSERVICE/ServiceCollection
 Catalog URL will be generate
 
-// This policy can be used to create or modify the standard HTTP 
-request and response messages //
+// Credentials policy
 <AssignMessage async="false" continueOnError="false" enabled="true" 
 xmlns='http://www.sap.com/apimgmt'>
    <AssignVariable>
@@ -27,3 +26,26 @@ xmlns='http://www.sap.com/apimgmt'>
        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
        <AssignTo createNew="false" type="request"></AssignTo>
 </AssignMessage>
+
+
+//SetBasicAuthentication policy
+<BasicAuthentication async='true' continueOnError='false' 
+enabled='true' xmlns='http://www.sap.com/apimgmt'>
+        <!- Operation can be Encode or Decode ->
+        <Operation>Encode</Opeartion>
+        <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+        <!- for Encode, User element can be used to dynamically 
+populate the user value ->
+        <User ref='basicAuth.username'></User>
+        <!- for Encode, Password element can be used to dynamically 
+populate the password value ->
+        <Password ref='basicAuth.password'></Password>
+        <!- Source is used to retrieve the encoded value of username 
+and password. This should not be used if the operation is Encode ->
+        <Source>request.header.Authorization</Source>
+        <!- Assign to is used to assign the encoded value of username 
+and password to a variable. This should not be used if the operation 
+is Decode ->
+        <AssignTo createNew="false">request.header.Authorization</
+AssignTo>
+</BasicAuthentication>
